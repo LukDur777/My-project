@@ -12,7 +12,7 @@ public class playerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //transform.position += new Vector3(1, 0, 0) * Time.deltaTime ;
         //mozna prosciej: Vector3.right
@@ -43,7 +43,7 @@ public class playerController : MonoBehaviour
         movement *= moveSpeed;
 
         //przesun gracza w osi x
-        //transform.position += movement;
+        transform.position += movement;
         
 
         //probujemy uzyc translateaa
