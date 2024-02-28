@@ -8,36 +8,26 @@ public class CCTVCameraController : MonoBehaviour
 
     public float turnAngle = 90;
     // Start is called before the first frame update
-    bool turningRight = true;
+    bool turningRight = !true;
+
+    Transform cameraLens;
     void Start()
     {
-        
+        Transform cameraposition = transform.Find("CameraPosition");
+        cameraLens = cameraposition.Find("Cylinder");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(turningRight)
-        {
-            TurnRight();
-        }
-        else
-        {
-            TurnLeft(); 
-        CheckAngle();
-        }
-    }
-    void TurnRight() {
-        transform.Rotate(Vector3.down * Time.deltaTime * turnSpeed);
+        transform.rotation = Quaternion.Euler(new Vector3(0, Mathf.PingPong(Time.time, 9) * 10 - 45, 0));
+
+        CheckIfPlayerVisible();
     }
 
-    void TurnLeft()
+    void CheckIfPlayerVisible()
     {
-        transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed);
+        Debug.DrawRay(cameraLens.position, cameraLens.TransformDirection(Vector3.down) * 100, Color.yellow);
     }
-    void CheckAngle()
-    {
-        //TODO: zawracaj kamere
-        ///Debug.Log("y: " + transform.eulerAngles.y + ", a ")
-    }
+
 }
