@@ -73,6 +73,20 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("BOOM");
+        //Debug.Log("BOOM");
+
+        if (other.CompareTag("LevelEnd"))
+        {
+            //stanelismy a miejscu gdzie jest koniec poziomu - wygraliśmy
+
+            //find->nazwaobiektu->nazwaskryptu->nazwa funkcji
+            GameObject.Find("LevelManager").GetComponent<LevelManager>().OnWin();
+        }
+        if (other.CompareTag("CameraView"))
+        {
+            //kamera nas zobaczyła - przegraliśmy
+            GameObject.Find("LevelManager").GetComponent<LevelManager>().OnLose();
+
+        }
     }
 }

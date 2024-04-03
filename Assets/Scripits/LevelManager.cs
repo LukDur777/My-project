@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class LevelManager : MonoBehaviour
     //elementy UI
 
     public GameObject timeCounter;
+    public GameObject gameOverOverlay;
     void Start()
     {
         
@@ -34,5 +36,22 @@ public class LevelManager : MonoBehaviour
     {
         //funkcja odpowiedzialna za aktualizacje interfejsu uzytkownika
 
-        timeCounter.GetComponent<TextMeshProUGUI>().text = "Pozost³y zas:" + Mathf.Floor(timeLeft).ToString();}
+        timeCounter.GetComponent<TextMeshProUGUI>().text = "Pozost³y zas:" + Mathf.Floor(timeLeft).ToString();
+
+        if (timeLeft <= 0)
+            gameOverOverlay.SetActive(true);
+    }
+    public void OnWin()
+    {
+        //zwyciestwo
+        gameOverOverlay.SetActive(true);
+        gameOverOverlay.transform.Find("TextReason").GetComponent<TextMeshProUGUI>().text = "Wygrales!";
+
+    }
+    public void OnLose()
+    {
+        //porazka
+        gameOverOverlay.SetActive(true);
+        gameOverOverlay.transform.Find("TextReason").GetComponent<TextMeshProUGUI>().text = "Kamera cie zobaczyla!";
+    }
 }
